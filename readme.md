@@ -59,3 +59,7 @@ Convert a website to a PDF with a custom header and footer:
 ```bash
 sitetopdf -u https://example.com -o output.pdf -h "<div>Header</div>" -t "<div>Footer</div>" -n
 ```
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
