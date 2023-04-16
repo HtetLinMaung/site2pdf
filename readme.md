@@ -1,13 +1,13 @@
-# site2pdf
+# sitetopdf
 
-site2pdf is a command-line utility that allows you to convert a webpage into a PDF file. It provides various options to customize the generated PDF, such as page format, margins, headers and footers, and more.
+sitetopdf is a command-line utility that allows you to convert a webpage into a PDF file. It provides various options to customize the generated PDF, such as page format, margins, headers and footers, and more.
 
 ## Installation
 
-Install site2pdf using npm:
+Install sitetopdf using npm:
 
 ```bash
-npm install -g site2pdf
+npm install -g sitetopdf
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ npm install -g site2pdf
 To convert a website to PDF, simply run the following command:
 
 ```bash
-site2pdf -u https://example.com -o output.pdf
+sitetopdf -u https://example.com -o output.pdf
 ```
 
 ## Options
@@ -45,17 +45,17 @@ site2pdf -u https://example.com -o output.pdf
 Convert a website to a PDF in landscape mode:
 
 ```bash
-site2pdf -u https://example.com -o output.pdf -l
+sitetopdf -u https://example.com -o output.pdf -l
 ```
 
 Convert a website to a PDF with custom margins:
 
 ```bash
-site2pdf -u https://example.com -o output.pdf -m 1cm -b 1cm -r 1cm -e 1cm
+sitetopdf -u https://example.com -o output.pdf -m 1cm -b 1cm -r 1cm -e 1cm
 ```
 
 Convert a website to a PDF with a custom header and footer:
 
 ```bash
-site2pdf -u https://example.com -o output.pdf -h "<div>Header</div>" -t "<div>Footer</div>" -n
+sitetopdf -u https://example.com -o output.pdf -h "<div>Header</div>" -t "<div>Footer</div>" -n
 ```

@@ -1,9 +1,9 @@
 {
-  "name": "site2pdf",
+  "name": "sitetopdf",
   "version": "1.0.0",
   "description": "A command line program to convert a website to PDF using Puppeteer",
   "bin": {
-    "site2pdf": "./index.js"
+    "sitetopdf": "./index.js"
   },
   "keywords": [
     "pdf",
