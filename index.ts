@@ -96,6 +96,7 @@ program.parse(process.argv);
     waitUntil: options.waitUntil,
     timeout: +options.timeout,
   });
+  await page.emulateMediaType("screen");
   await page.pdf(pdfOptions);
   await browser.close();
 })();
