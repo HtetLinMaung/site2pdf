@@ -71,7 +71,9 @@ program.parse(process.argv);
   const options = program.opts();
   const pdfOptions: PDFOptions = {
     format: options.format,
-    path: path.join(process.cwd(), options.output),
+    path: path.isAbsolute(options.output)
+      ? options.output
+      : path.join(process.cwd(), options.output),
     landscape: options.landscape,
     scale: +options.scale,
     margin: {
