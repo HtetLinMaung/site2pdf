@@ -1,6 +1,6 @@
 {
   "name": "sitetopdf",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A command line program to convert a website to PDF using Puppeteer",
   "bin": {
     "sitetopdf": "./index.js"

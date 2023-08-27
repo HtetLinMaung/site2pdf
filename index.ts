@@ -90,7 +90,14 @@ program.parse(process.argv);
     pageRanges: options.pageRanges,
   };
 
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+    ],
+    headless: true,
+  });
   const page = await browser.newPage();
   await page.goto(options.url, {
     waitUntil: options.waitUntil,
