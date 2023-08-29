@@ -63,7 +63,8 @@ program
     "-k, --timeout <timeout>",
     "Maximum navigation time in milliseconds",
     "30000"
-  );
+  )
+  .option("-v, --verbose", "Display detailed information during execution");
 
 program.parse(process.argv);
 
@@ -89,6 +90,13 @@ program.parse(process.argv);
     preferCSSPageSize: options.preferCssPageSize,
     pageRanges: options.pageRanges,
   };
+
+  if (options.verbose) {
+    console.log(`options: `);
+    console.log(options);
+    console.log(`pdf options: `);
+    console.log(pdfOptions);
+  }
 
   const browser = await puppeteer.launch({
     args: [

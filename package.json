@@ -1,6 +1,6 @@
 {
   "name": "sitetopdf",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A command line program to convert a website to PDF using Puppeteer",
   "bin": {
     "sitetopdf": "./index.js"
@@ -16,7 +16,7 @@
   "license": "ISC",
   "scripts": {
     "build": "tsc",
-    "test": "npm run build && node index.js -u http://localhost:3001/belovedev/ebooks/mastering-javascript/preface -o preface.pdf"
+    "test": "npm run build && node index.js -u https://github.com/HtetLinMaung/books/blob/master/rust/rust-unveiled/chapter3.md -o out.pdf -h \"<div style='font-size: 10px'>Header</div>\" -t \"<div>Footer</div>\" -n -m 60px -b 60px"
   },
   "dependencies": {
     "commander": "^8.0.0",
