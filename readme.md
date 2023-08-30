@@ -66,7 +66,7 @@ sitetopdf -u https://example.com -o output.pdf -h "<div>Header</div>" -t "<div>F
 Set HTML content from a string:
 
 ```bash
-sitetopdf -x "<html><body>Hello, world!</body></html>" -o output.pdf
+sitetopdf -x '<html><body>Hello, world!</body></html>' -o output.pdf
 ```
 
 Set HTML content from a file:

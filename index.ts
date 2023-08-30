@@ -10,7 +10,7 @@ import fs from "fs/promises";
 program
   .version("1.0.0")
   .description("Convert a website to PDF")
-  .requiredOption("-u, --url <url>", "URL of the website to convert")
+  .option("-u, --url <url>", "URL of the website to convert")
   .requiredOption("-o, --output <output>", "Output PDF file path")
   .option("-f, --format <format>", "Paper format ('A4', 'Letter', etc.)", "A4")
   .option("-l, --landscape", "Whether to set the PDF in landscape mode")
