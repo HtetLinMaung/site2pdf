@@ -3,6 +3,7 @@
 import { program } from "commander";
 import puppeteer, { PDFOptions } from "puppeteer";
 import path from "path";
+import fs from "fs/promises";
 
 // .option("-p, --path <path>", "File path to save the PDF file", "")
 
@@ -64,7 +65,13 @@ program
     "Maximum navigation time in milliseconds",
     "30000"
   )
-  .option("-v, --verbose", "Display detailed information during execution");
+  .option("-v, --verbose", "Display detailed information during execution")
+  .option("-x, --content <content>", "HTML content to set on the page")
+  .option(
+    "--content-type <type>",
+    "Type of content ('string' or 'file')",
+    "string"
+  );
 
 program.parse(process.argv);
 
@@ -107,10 +114,23 @@ program.parse(process.argv);
     headless: true,
   });
   const page = await browser.newPage();
-  await page.goto(options.url, {
-    waitUntil: options.waitUntil,
-    timeout: +options.timeout,
-  });
+
+  let content = options.content;
+
+  if (options.contentType === "file") {
+    content = await fs.readFile(options.content, "utf-8");
+  }
+  if (content) {
+    await page.setContent(content, {
+      waitUntil: options.waitUntil,
+      timeout: +options.timeout,
+    });
+  } else {
+    await page.goto(options.url, {
+      waitUntil: options.waitUntil,
+      timeout: +options.timeout,
+    });
+  }
   await page.emulateMediaType("screen");
   await page.pdf(pdfOptions);
   await browser.close();

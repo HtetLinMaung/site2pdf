@@ -39,6 +39,9 @@ sitetopdf -u https://example.com -o output.pdf
 | --ignore-http-errors    | -a    | Whether to ignore any HTTP errors that occur during the navigation            | false          |
 | --wait-until            | -g    | When to consider the navigation succeeded, e.g., 'networkidle0', 'load', etc. | 'networkidle0' |
 | --timeout               | -k    | Maximum navigation time in milliseconds                                       | '30000'        |
+| --verbose               | -v    | Display detailed information during execution                                 |                |
+| --content               | -x    | HTML content to set on the page                                               |                |
+| --content-type          |       | Type of content ('string' or 'file')                                          | 'string'       |
 
 ## Examples
 
@@ -58,6 +61,18 @@ Convert a website to a PDF with a custom header and footer:
 
 ```bash
 sitetopdf -u https://example.com -o output.pdf -h "<div>Header</div>" -t "<div>Footer</div>" -n
+```
+
+Set HTML content from a string:
+
+```bash
+sitetopdf -x "<html><body>Hello, world!</body></html>" -o output.pdf
+```
+
+Set HTML content from a file:
+
+```bash
+sitetopdf -x "./path/to/file.html" --content-type file -o output.pdf
 ```
 
 ## Show your support
