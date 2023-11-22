@@ -5,13 +5,16 @@ import puppeteer, { PDFOptions } from "puppeteer";
 import path from "path";
 import fs from "fs/promises";
 
-// .option("-p, --path <path>", "File path to save the PDF file", "")
+const formatDimensions: any = {
+  A4: { width: 794, height: 1123 }, // Dimensions for A4 at 96 DPI
+  Letter: { width: 816, height: 1056 }, // Dimensions for Letter at 96 DPI
+};
 
 program
   .version("1.0.0")
   .description("Convert a website to PDF")
   .option("-u, --url <url>", "URL of the website to convert")
-  .requiredOption("-o, --output <output>", "Output PDF file path")
+  .option("-o, --output <output>", "Output PDF file path", "output.pdf")
   .option("-f, --format <format>", "Paper format ('A4', 'Letter', etc.)", "A4")
   .option("-l, --landscape", "Whether to set the PDF in landscape mode")
   .option("-s, --scale <scale>", "Scale of the webpage rendering", "1")
@@ -58,7 +61,7 @@ program
   .option(
     "-g, --wait-until <wait-until>",
     "When to consider the navigation succeeded, e.g., 'networkidle0', 'load', etc.",
-    "networkidle0"
+    "load"
   )
   .option(
     "-k, --timeout <timeout>",
@@ -71,6 +74,12 @@ program
     "--content-type <type>",
     "Type of content ('string' or 'file')",
     "string"
+  )
+  .option("-i, --image", "Generate an image instead of a PDF")
+  .option(
+    "-p, --image-output <image-output>",
+    "Output image file path",
+    "output.png"
   );
 
 program.parse(process.argv);
@@ -111,7 +120,7 @@ program.parse(process.argv);
       "--disable-setuid-sandbox",
       "--disable-dev-shm-usage",
     ],
-    headless: true,
+    headless: "new",
   });
   const page = await browser.newPage();
 
@@ -131,7 +140,25 @@ program.parse(process.argv);
       timeout: +options.timeout,
     });
   }
-  await page.emulateMediaType("screen");
-  await page.pdf(pdfOptions);
+  if (options.image) {
+    const selectedFormat =
+      formatDimensions[options.format] || formatDimensions.A4; // Default to A4 if format not recognized
+
+    await page.setViewport({
+      width: selectedFormat.width,
+      height: selectedFormat.height,
+    });
+
+    const imagePath = options.imageOutput
+      ? path.isAbsolute(options.imageOutput)
+        ? options.imageOutput
+        : path.join(process.cwd(), options.imageOutput)
+      : "output.png"; // Default image path
+
+    await page.screenshot({ path: imagePath, fullPage: true });
+  } else {
+    await page.emulateMediaType("screen");
+    await page.pdf(pdfOptions);
+  }
   await browser.close();
 })();
